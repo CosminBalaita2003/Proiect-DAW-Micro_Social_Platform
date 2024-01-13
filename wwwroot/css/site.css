@@ -1,0 +1,166 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+        background-color: #1B1B1B;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: #1B1B1B; /* Set the background color to black for dark mode */
+    color: white; /* Set the text color to white for dark mode */
+}
+
+.navbar {
+    background-color: #dfe6e9 !important;
+    border: none !important;
+    box-shadow: 0 3px 12px #636e72 !important;
+}
+
+a.nav-link {
+    color: #2c2c2c !important;
+}
+
+    a.nav-link:hover {
+        color: #00b894 !important;
+    }
+
+.logoutbtn {
+    color: #2c2c2c !important;
+}
+
+    .logoutbtn:hover {
+        color: #00b894 !important;
+    }
+
+.note-editor .dropdown-toggle::after {
+    display: none;
+}
+.note-editable .img {
+    width: 100%;
+    resize: both;
+    height: auto;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: dimgray;
+    color: gray;
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: darkgray;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3498db;
+}
+.card {
+    width: 60%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #393939;
+}
+
+.card-text {
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+    height: auto;
+
+}
+
+
+.btn-success {
+    display: block;
+    margin: 0 auto;
+    background-color: #636e72;
+    border-color: #636e72;
+    color: aliceblue;
+}
+    .btn-success:hover {
+        background-color: #4b5256; 
+        border-color: #4b5256; 
+    }
+
+.data {
+    color: gray;
+}
+.btn-danger {
+    display: block;
+    margin: auto;
+}
+.ptsummer{
+    background-color: white;
+
+}
+.btn-outline-success{
+
+border-color: #8134af;
+color: white;
+}
+.btn-outline-success:hover{
+    background-color: #8134af;
+    border-color: #8134af;
+    color: white;
+}

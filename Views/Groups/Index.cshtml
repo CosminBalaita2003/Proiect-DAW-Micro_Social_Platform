@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "List of existent groups";
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+
+@if (TempData.ContainsKey("message"))
+{
+    <h1>@ViewBag.message</h1>
+}
+
+<br />
+
+@foreach (var group in ViewBag.Groups)
+{
+
+    //verificam daca useru curent e deja parte din grup
+    var isUserInGroup = false;
+
+    if (group != null && group.UserGroups != null)
+    {
+
+        foreach (var ug in group.UserGroups)
+        {
+            if (ug.UserId == ViewBag.CurrentUser)
+            {
+                isUserInGroup = true;
+                break;
+            }
+        }
+    }
+
+    //afisare ifrormatii grup
+    @Html.Label("GroupName", "Group Name:")
+    <p>@group.GroupName</p>
+
+    //verificam daca grupul are decriere (e nullable deci poate sa nu existe)
+    @if (!string.IsNullOrEmpty(group.Description))
+    {
+        @Html.Label("Description", "Group Description:")
+        <p>@group.Description</p>
+        <br />
+    }
+
+    @if (isUserInGroup == true) //daca useru curent e deja in grup afisam buton pt
+                               //afisarea continutului din grup
+    {
+        <a class="btn btn-success" href="/Groups/Show/@group.Id">See group content</a>
+        <br />
+        <br />
+
+    }
+
+    else //userul curent nu e in grup deci ii afisam buton de alaturare
+    {
+        <a class="btn btn-success" href="/Groups/Join/@group.Id">Join group</a>
+        <br />
+        <br />
+
+    }
+
+
+}

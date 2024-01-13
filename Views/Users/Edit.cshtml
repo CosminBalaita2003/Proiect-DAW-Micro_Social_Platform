@@ -1,0 +1,61 @@
+﻿@model Micro_Social_Platform.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Edit";
+}
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Users", routeValues: new { id = Model.Id }))
+{
+    @Html.ValidationSummary(false, "", new{@class ="text-danger"})
+    @Html.Label("FirstName", "First Name")
+
+    <br />
+    <br />
+
+    @Html.TextArea("FirstName", Model.FirstName, new {@class ="form-control"})
+
+
+    @Html.ValidationMessage("FirstName", null, new {@class = "text-danger"})
+
+    <br />
+    <br />
+    @Html.Label("LastName", "Last Name")
+    <br />
+    <br />
+    @Html.TextArea("LastName", Model.LastName, new {@class ="form-control"})
+    @Html.ValidationMessage("LastName", null, new {@class = "text-danger"})
+    <br />
+    <br />
+    @Html.Label("Pronouns", "Pronouns")
+    <br />
+    <br />
+    @Html.TextArea("Pronouns", Model.Pronouns, new {@class ="form-control"})
+    @Html.ValidationMessage("Pronouns", null, new {@class = "text-danger"})
+    <br />
+    <br />
+    @Html.Label("Bio", "Bio")
+    <br />
+    <br />
+    @Html.TextArea("Bio", Model.Bio, new {@class ="form-control"})
+    @Html.ValidationMessage("Bio", null, new {@class = "text-danger"})
+    <br />
+    <br />
+    <div class="form-group">
+        <label asp-for="IsPrivate">Account Privacy</label>
+        <select asp-for="IsPrivate" class="form-control">
+            <option value="True">Private</option>
+            <option value="False">Public</option>
+        </select>
+    </div>
+
+
+
+
+    <button class="btn btn-success" type="submit">Save</button>
+}
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

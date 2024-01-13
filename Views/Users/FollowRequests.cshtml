@@ -1,0 +1,26 @@
+﻿@model List<FollowRequest>
+
+<h2>Follow requests received</h2>
+
+@if (Model.Count == 0)
+{
+    <p>You don't have any follow requests.</p>
+}
+else
+{
+
+    @foreach (var request in Model)
+    {
+        <div>
+            <p>@request.Sender.UserName</p>
+
+
+            <form asp-controller="Users" asp-action="AcceptFollowRequest" method="post">
+                <input type="hidden" name="requestId" value="@request.Id" />
+                <button type="submit">Accept Follow Request</button>
+            </form>
+
+        </div>
+    }
+
+}

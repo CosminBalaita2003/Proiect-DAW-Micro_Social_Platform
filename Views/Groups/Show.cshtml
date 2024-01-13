@@ -1,0 +1,105 @@
+﻿@model Micro_Social_Platform.Models.Group
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+
+@if (TempData["message"] != null)
+{
+    <div class="alert @ViewBag.Alert p-3 rounded-3 text-center mb-5">
+        @ViewBag.Message
+    </div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title alert-success py-3 px-3 rounded-2">@Model.GroupName</h3> @* @afisam numele grupului@ *@
+        <div class="card-text">@Model.Description</div> @* @descrierea@ *@
+    </div>
+
+    @{
+        var currentUser = User.Identity.IsAuthenticated ? await UserManager.GetUserAsync(User) : null;
+        // @luam userul curent@
+    }
+
+    @if (User.IsInRole("Admin") || (currentUser != null && currentUser.Id == Model.UserId))
+    {
+@*         @daca utilizatorul curent e admin sau e cel care a creat grupul afisam butoanele de editare si stergere@ *@
+
+        <div class="d-flex flex-row justify-content-between p-3 border-1 border-top">
+            <a class="btn btn-success" href="/Groups/Edit/@Model.Id">Edit Group</a>
+            <form method="post" action="/Groups/Delete/@Model.Id">
+                <button class="btn btn-danger" type="submit">Delete Group</button>
+            </form>
+        </div>
+    }
+</div>
+
+
+@* Afisare comentarii *@
+<h2 class="text-center">Mesaje</h2>
+<br />
+@foreach (var mess in Model.Messages)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+
+                <div>
+                    <p>@mess.User.UserName</p>@*  @afisam numele utilizatorului care a postat mesajul@ *@
+                    <p>@mess.Content</p>
+                    <br/>
+                   @*  @daca utilizatorul este admin sau e apartinatorul mesajului afisam butoane de edit si delete@ *@
+                    @if (User.IsInRole("Admin") || (currentUser != null && currentUser.Id == @mess.UserId))
+                    {
+                        <div class="d-flex justify-content-end">
+                            <!-- justify-content-end pentru aliniere la dr -->
+                            <div class="dropdown">
+                                <button class="btn btn-outline-primary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-three-dots"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="btn btn-outline-primary btn-block" href="/Messages/Edit/@mess.Id"><i class="bi bi-pencil-square"></i>Edit</a>
+                                    <form method="post" action="/Messages/Delete/@mess.Id">
+                                        <button class="btn btn-outline-primary btn-block" type="submit"><i class="bi bi-trash"></i>Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <small>@mess.Date</small>
+                    
+
+
+
+                </div>
+                <br>
+               
+
+            </div>
+        </div>
+    </div>
+
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="card">
+                <form method="post" action="/Groups/Show/@Model.Id">
+                    <div class="card-body">
+                        <input type="hidden" name="GroupId" value="@Model.Id" />
+                        <label>Message Content</label>
+                        <br />
+                        <textarea class="form-control" name="Content"></textarea>
+                        @Html.ValidationMessage("Content", null, new { @class = "text-danger"})
+                        <br /><br />
+                        <button class="btn btn-success" type="submit">Add message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿@model Micro_Social_Platform.Models.Post
+@{
+    ViewBag.Title = "Feed";
+
+}
+<br/>
+<h2 class="text-center">Feed</h2>
+<br/>
+@if(ViewBag.Message != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.Message
+    </div>
+}
+<div class="text-center">
+<a class="btn btn-outline-success" href="/Posts/New">Add New Post</a>
+    
+
+</div>
+<br/>
+    @foreach (Micro_Social_Platform.Models.Post post in ViewBag.Posts)
+    {
+    <div class="card">
+        <div class="card-text">@Html.Raw(post.Content)</div> @* @afisare continut postare@ *@
+        <div><i class="bi bi-person"></i> @post.User.UserName</div> @* @afisare username ul userului care a fct postarea@ *@
+        <span class="data">@post.Date</span>@*  @data la care a fost postata@ *@
+        <a class="btn btn-success" href="/Posts/Show/@post.Id">Show Post</a> @* @buton pentru show@ *@
+    </div>
+    }
